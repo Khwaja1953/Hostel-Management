@@ -48,7 +48,7 @@ app.use('/api/grievance',grievanceRoute);
 app.use('/api/messmenu', messMenuApi);
 app.use('/api/main',mainRoutes);
 // MongoDB Connection
-const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/mak_hostel';
+const mongoURI = 'mongodb+srv://khwajamuzamil1953:2Xn2ehNcorpp6XSW@cluster0.uaqxmb8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
