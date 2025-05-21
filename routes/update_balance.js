@@ -5,7 +5,7 @@ const Student = require('../models/Student');
 // GET student details by enrollmentNumber
 router.get('/:enrollmentNumber', async (req, res) => {
   const { enrollmentNumber } = req.params;
-  console.log('Received enrollmentNumber:', enrollmentNumber);
+  // console.log('Received enrollmentNumber:', enrollmentNumber);
 
   try {
     const student = await Student.findOne({ enrollmentNumber });

@@ -20,6 +20,7 @@ const rebateRoute = require('./routes/rebate_api');
 const grievanceRoute = require('./routes/grievance_api');
 const messMenuApi = require('./routes/mess_menu_api');
 const mainRoutes = require('./routes/main');
+const printRoutes = require('./routes/print');
 require('dotenv').config();
 
 const app = express();
@@ -47,6 +48,7 @@ app.use('/api/rebate',rebateRoute);
 app.use('/api/grievance',grievanceRoute);
 app.use('/api/messmenu', messMenuApi);
 app.use('/api/main',mainRoutes);
+app.use('/api/print',printRoutes);
 // MongoDB Connection
 const mongoURI = process.env.MONGO_URI || 'mongodb+srv://khwajamuzamil1953:2Xn2ehNcorpp6XSW@cluster0.uaqxmb8.mongodb.net/mak_hostel?retryWrites=true&w=majority&appName=Cluster0';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
