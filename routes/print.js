@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const students = await Student.find(
       { status: 'active' }, // Filter students with status 'active'
-      'enrollmentNumber roomNumber name department messBalance'
+      'enrollmentNumber roomNumber name department transactionHistory messBalance'
     ).sort({ roomNumber: 1 }); // Sort by roomNumber
     res.status(200).json(students);
   } catch (err) {
