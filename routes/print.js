@@ -9,7 +9,21 @@ router.get('/', async (req, res) => {
       { status: 'active' }, // Filter students with status 'active'
       'enrollmentNumber roomNumber name department transactionHistory messBalance'
     ).sort({ roomNumber: 1 }); // Sort by roomNumber
-    res.status(200).json(students);
+      // Add lastTransaction field to each student
+    const studentsWithLastTransaction = students.map(student => {
+      const lastTransaction = student.transactionHistory && student.transactionHistory.length > 0
+        ? student.transactionHistory[student.transactionHistory.length - 1]
+        : null;
+      return {
+        enrollmentNumber: student.enrollmentNumber,
+        roomNumber: student.roomNumber,
+        name: student.name,
+        department: student.department,
+        messBalance: student.messBalance,
+        lastTransaction, // will be null if no transaction
+      };
+    });
+    res.status(200).json(studentsWithLastTransaction);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
