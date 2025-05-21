@@ -11,12 +11,13 @@ router.get('/', async (req, res) => {
     ).sort({ roomNumber: 1 }); // Sort by roomNumber
       // Add lastTransaction field to each student
     const studentsWithLastTransaction = students.map(student => {
-      // Ensure transactionHistory is a plain array
+      // Convert to plain array
       const history = Array.isArray(student.transactionHistory)
-        ? student.transactionHistory
-        : (student.transactionHistory ? student.transactionHistory.toObject() : []);
+        ? student.transactionHistory.map(t => t.toObject ? t.toObject() : t)
+        : [];
+      // Sort by date descending and pick the first (most recent)
       const lastTransaction = history.length > 0
-        ? history[history.length - 1]
+        ? history.sort((a, b) => new Date(b.date) - new Date(a.date))[0]
         : null;
       return {
         enrollmentNumber: student.enrollmentNumber,
