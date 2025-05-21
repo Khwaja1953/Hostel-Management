@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
     const students = await Student.find(
       { status: 'active' }, // Filter students with status 'active'
-      'enrollmentNumber roomNumber name department transactionHistory messBalance'
+      'enrollmentNumber roomNumber name department lastTransaction messBalance'
     ).sort({ roomNumber: 1 }); // Sort by roomNumber
       // Add lastTransaction field to each student
     const studentsWithLastTransaction = students.map(student => {
