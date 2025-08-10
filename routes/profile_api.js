@@ -6,13 +6,14 @@ const Student = require('../models/Student'); // Import the Student model
 // GET /api/profile - Fetch student details by enrollment number
 router.get('/', async (req, res) => {
   const { enrollmentNumber } = req.query;
+  const hostel = req.headers['x-hostel'];
 
   if (!enrollmentNumber) {
     return res.status(400).json({ error: 'Enrollment number is required' });
   }
 
   try {
-    const student = await Student.findOne({ enrollmentNumber });
+    const student = await Student.findOne({ enrollmentNumber, hostel });
 
     if (!student) {
       return res.status(404).json({ error: 'Student not found' });
