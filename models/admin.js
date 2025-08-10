@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 // Define the User schema
 const adminSchema = new mongoose.Schema({
+  hostel:{
+    type: String,
+    required: true,   
+  },
   username: {
     type: String,
     required: true,

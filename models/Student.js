@@ -17,6 +17,7 @@ messBalance: { type: Number, required: true },
   hostelLeavingDate: { type: String, default: null },
   status: { type: String, enum: ['active', 'left'], required: true },
   batch: {type: Number, required: true},
+  hostel: {type: String, required: true},
 
 
    transactionHistory: [

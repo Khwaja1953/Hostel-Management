@@ -17,9 +17,11 @@ router.get('/', async (req, res) => {
 // GET /api/batches/:batch - Fetch students for a specific batch
 router.get('/:batch', async (req, res) => {
   const { batch } = req.params;
+  const hostel = req.headers['x-hostel'];
+  console.log(hostel);
   try {
     // Fetch only the required fields
-    const students = await Student.find({ batch }).select('enrollmentNumber roomNumber name department messBalance');
+    const students = await Student.find({ batch, hostel }).select('enrollmentNumber roomNumber name department messBalance');
     res.status(200).json(students);
   } catch (error) {
     console.error('Error fetching students for batch:', error);

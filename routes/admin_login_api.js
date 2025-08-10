@@ -5,13 +5,18 @@ const router = express.Router();
 
 // POST /api/admin/login
 router.post('/', async (req, res) => {
-  const { username, password, designation } = req.body;
+  const {hostel, username, password, designation } = req.body;
 
-  if (!username || !password) {
+  if (!hostel || !username || !password) {
     return res.status(400).json({ success: false, message: 'All fields are required' });
   }
 
   try {
+    const hosteladmin = await admin.findOne({hostel});
+    if(!hosteladmin){
+      return res.status(401).json({success: false, message: 'Invalid hostel'})
+    }
+
     // Find the admin by username and designation
     const useradmin = await admin.findOne({ username});
     if (!useradmin) {

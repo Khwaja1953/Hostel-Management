@@ -4,11 +4,16 @@ const Student = require('../models/Student');
 
 // GET all active students sorted by roomNumber
 router.get('/', async (req, res) => {
+  const hostel = req.headers['x-hostel'];
+  // console.log(hostel);
+  if (!hostel) {
+    return res.status(400).json({ error: 'Hostel is required' });
+  }
   try {
     const students = await Student.find(
-      { status: 'active' }, // Filter students with status 'active'
+      { status: 'active', hostel },
       'enrollmentNumber roomNumber name department messBalance'
-    ).sort({ roomNumber: 1 }); // Sort by roomNumber
+    ).sort({ roomNumber: 1 });
     res.status(200).json(students);
   } catch (err) {
     console.error(err);

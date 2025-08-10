@@ -5,10 +5,11 @@ const Student = require('../models/Student');
 // GET student details by enrollmentNumber
 router.get('/:enrollmentNumber', async (req, res) => {
   const { enrollmentNumber } = req.params;
-  // console.log('Received enrollmentNumber:', enrollmentNumber);
+  const hostel = req.headers['x-hostel'];
+  // console.log('Received enrollmentNumber:', enrollmentNumber, hostel);
 
   try {
-    const student = await Student.findOne({ enrollmentNumber });
+    const student = await Student.findOne({ enrollmentNumber, hostel });
     if (!student) {
       return res.status(404).json({ error: 'Student not found' });
     }
